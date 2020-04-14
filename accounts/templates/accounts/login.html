@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block head %}
+<title>Login Page</title>
+{% endblock %}
+
+{% block body %}
+<div class="container">
+    <h1>This is Login page!</h1>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-primary">Login</button>
+        <!-- <button type="submit" class="btn btn-success">Register</button> -->
+    </form>
+</div>
+{% endblock %}

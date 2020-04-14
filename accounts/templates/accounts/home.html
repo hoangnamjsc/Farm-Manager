@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block body %}
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="#">Farm Manager</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+        <li class="nav-item">
+            <a class="nav-link" href="#">Menu 1</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#">Menu 2</a>
+        </li>
+        </ul>
+    <div>
+        <button onclick="window.location.href = '{% url 'login' %}';" class="btn btn-info" type="submit">Login</button>
+        <button onclick="window.location.href = '{% url 'register' %}';" class="btn btn-success" type="submit">Register</button>
+    </div>
+  </div>
+</nav>
+
+<div class="container">
+  <h1>Home page example!</h1>
+</div>
+{% endblock %}
