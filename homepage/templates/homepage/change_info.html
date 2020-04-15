@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block head %}
+<title>Change Info</title>
+{% endblock %}
+
+{% block body %}
+<div class="container">
+    <h2>Change Info!</h2>
+    <form method="post">
+        {% csrf_token %}
+        <!--
+        <p>Username: {{ form.username }}</p>
+        <p>First name: {{ form.first_name }}</p>
+        <p>Last name: {{ form.last_name }}</p>
+        <p>Email: {{ form.email }}</p>
+        -->
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-danger">Save</button>
+    </form>
+</div>
+{% endblock %}

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    {% block head %}
+    {% endblock %}
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="/">Farm Manager</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+                <a class="nav-link" href="#">Contact Us</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">About</a>
+            </li>
+            </ul>
+        <div>
+            {% if user.is_authenticated %}
+            <button onclick="window.location.href = '{% url 'dashboard:index' %}';" class="btn btn-outline-success" type="submit">Dashboard</button>
+            <button onclick="window.location.href = '{% url 'homepage:profile' %}';" type="button" class="btn btn-outline-info">Profile</button>
+            <button onclick="window.location.href = '{% url 'homepage:logout' %}';" class="btn btn-outline-dark" type="submit">Logout</button>
+            {% else %}
+            <button onclick="window.location.href = '{% url 'homepage:login' %}';" class="btn btn-info" type="submit">Login</button>
+            <button onclick="window.location.href = '{% url 'homepage:register' %}';" class="btn btn-success" type="submit">Register</button>
+            {% endif %}
+        </div>
+      </div>
+    </nav>
+    {% block body %}
+    {% endblock %}
+</body>
+</html>
