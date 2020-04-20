@@ -12,7 +12,7 @@
     <p>Last name: {{ user.last_name }}</p>
     <p>Email: {{ user.email }}</p>
     {% for profile in profile %}
-        <p>Farm ID: {{ profile.farm_id }}</p>
+        <p>Farm ID: {{ profile.farm_id }}</p> <!-- -->
     {% endfor %}
     <button onclick="window.location.href = '{% url 'homepage:change_info' %}';" type="button" class="btn btn-info">Change Info</button>
     <button onclick="window.location.href = '{% url 'homepage:change_password' %}';" type="button" class="btn btn-info">Change Password</button>
