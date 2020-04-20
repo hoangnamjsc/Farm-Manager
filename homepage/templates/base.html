@@ -5,6 +5,9 @@
     {% block head %}
     {% endblock %}
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 </head>
 <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -15,24 +18,25 @@
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
-            <li class="nav-item">
-                <a class="nav-link" href="#">Contact Us</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">About</a>
-            </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Contact Us</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">About</a>
+                </li>
             </ul>
-        <div>
-            {% if user.is_authenticated %}
-            <button onclick="window.location.href = '{% url 'dashboard:index' %}';" class="btn btn-outline-success" type="submit">Dashboard</button>
-            <button onclick="window.location.href = '{% url 'homepage:profile' %}';" type="button" class="btn btn-outline-info">Profile</button>
-            <button onclick="window.location.href = '{% url 'homepage:logout' %}';" class="btn btn-outline-dark" type="submit">Logout</button>
-            {% else %}
-            <button onclick="window.location.href = '{% url 'homepage:login' %}';" class="btn btn-info" type="submit">Login</button>
-            <button onclick="window.location.href = '{% url 'homepage:register' %}';" class="btn btn-success" type="submit">Register</button>
-            {% endif %}
+            <div>
+                {% if user.is_authenticated %}
+                <span class="text-monospace" style="font-size:17px !important;">[ Welcome {{ user.first_name }} {{ user.last_name }}] </span>
+                <button onclick="window.location.href = '{% url 'dashboard:index' %}';" class="btn btn-outline-success" type="submit">Dashboard</button>
+                <button onclick="window.location.href = '{% url 'homepage:profile' %}';" type="button" class="btn btn-outline-info">Profile</button>
+                <button onclick="window.location.href = '{% url 'homepage:logout' %}';" class="btn btn-outline-dark" type="submit">Logout</button>
+                {% else %}
+                <button onclick="window.location.href = '{% url 'homepage:login' %}';" class="btn btn-info" type="submit">Login</button>
+                <button onclick="window.location.href = '{% url 'homepage:register' %}';" class="btn btn-success" type="submit">Register</button>
+                {% endif %}
+            </div>
         </div>
-      </div>
     </nav>
     {% block body %}
     {% endblock %}

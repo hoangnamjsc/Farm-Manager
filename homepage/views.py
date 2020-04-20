@@ -1,34 +1,54 @@
 from django.shortcuts import render, redirect
 from  django.http import HttpResponse
-from homepage.forms import (
+from .forms import (
     RegisterForm,
     ChangeInfoForm
 )
-from django.contrib.auth.models import User
 from django.contrib.auth.forms import PasswordChangeForm
-from django.contrib.auth import update_session_auth_hash
+from django.contrib.auth import update_session_auth_hash, login as auth_login, authenticate
 from django.contrib.auth.decorators import login_required
+from .models import UserProfile
 
 # Create your views here.
-
 def index(request):
     return render(request,'homepage/home.html')
 
+
 def register(request):
-    if request.method == 'POST':
-        form = RegisterForm(request.POST)
-        if form.is_valid():
-            form.save()
-            return render(request,'homepage/register_success.html')
+    if not request.user.is_authenticated:
+        if request.method == 'POST':
+            form = RegisterForm(request.POST)
+            if form.is_valid():
+                form.save()
+                return render(request,'homepage/register_success.html')
+        else:
+            form = RegisterForm()
+        args = {'form': form}
+        return render(request, 'homepage/register.html', args)
     else:
-        form = RegisterForm()
-    args = {'form': form}
-    return render(request, 'homepage/register.html', args)
+        return redirect('homepage:profile')
+
+
+def login(request):
+    if not request.user.is_authenticated:
+        if request.method == 'POST':
+            username = request.POST.get('username')
+            password = request.POST.get('password')
+            user = authenticate(request, username=username, password=password)
+            if user is not None:
+                auth_login(request, user)
+                return redirect('homepage:profile')
+        return render(request, 'homepage/login.html')
+    else:
+        return redirect('homepage:profile')
+
 
 @login_required(login_url='/login/')
 def profile(request):
-    args = {'user': request.user}
+    profile = UserProfile.objects.all()
+    args = {'user': request.user, 'profile': profile}
     return render(request, 'homepage/profile.html', args)
+
 
 @login_required(login_url='/login/')
 def change_info(request):
@@ -36,11 +56,12 @@ def change_info(request):
         form = ChangeInfoForm(request.POST, instance = request.user)
         if form.is_valid():
             form.save()
-            return redirect('/profile')
+            return redirect('homepage:profile')
     else:
         form = ChangeInfoForm(instance = request.user)
     args = {'form': form}
     return render(request, 'homepage/change_info.html', args)
+
 
 @login_required(login_url='/login/')
 def change_password(request):
@@ -49,10 +70,13 @@ def change_password(request):
         if form.is_valid():
             form.save()
             update_session_auth_hash(request, form.user)
-            return redirect('/profile')
+            return redirect('homepage:profile')
         else:
-            return redirect('/profile/password')
+            return redirect('homepage:change_password')
     else:
         form = PasswordChangeForm(user = request.user)
     args = {'form': form}
     return render(request, 'homepage/change_password.html', args)
+
+def demo(request):
+    return render(request, 'homepage/demo.html')

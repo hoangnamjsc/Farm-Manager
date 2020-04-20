@@ -1,12 +1,15 @@
 {% extends 'base.html' %}
+{% load static %}
 
 
 {% block head %}
 <title>Logged out!</title>
+<script src="{% static 'homepage/js/countdown.js' %}"></script>
 {% endblock %}
 
 {% block body %}
 <div class="container">
     <h1>Logged out!</h1>
+    <p class="lead">You should be automatically redirected to Homepage in <strong id="seconds">3</strong>  seconds.</p>
 </div>
 {% endblock %}
