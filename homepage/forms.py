@@ -38,3 +38,5 @@ class ChangeInfoForm(UserChangeForm, forms.Form):
             'last_name',
             'email',
         )
+
+

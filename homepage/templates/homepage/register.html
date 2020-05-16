@@ -1,34 +1,32 @@
-{% extends 'base.html' %}
+{% extends 'homepage/base.html' %}
 {% load static %}
 
 {% block head %}
-<title>Register</title>
+<title>Đăng kí tài khoản</title>
 <link rel="stylesheet" type="text/css" href="{% static 'homepage/css/login_form.css' %}">
 {% endblock %}
 
 {% block body %}
 <div class="container" style="width: 40% !important;">
     <div class="imgcontainer">
-      <h3>Register!</h3>
+      <h3>Đăng kí tài khoản!</h3>
     </div>
     <div class="loginform">
         <form method="post">
             {% csrf_token %}
-            <label><b>Username</b></label>
+            <label><b>Tên đăng nhập</b></label>
             {{ form.username }}
-            <label><b>First Name</b></label>
+            <label><b>Tên</b></label>
             {{ form.first_name }}
-            <label><b>Last Name</b></label>
+            <label><b>Họ</b></label>
             {{ form.last_name }}
             <label><b>Email</b></label>
             {{ form.email }}
-            <label><b>Phone</b></label>
-            {{ form.phone_number }}
-            <label><b>Password</b></label>
+            <label><b>Mật khẩu</b></label>
             {{ form.password1 }}
-            <label><b>Password Confirm</b></label>
+            <label><b>Xác nhận mật khẩu</b></label>
             {{ form.password2 }}
-            <p style="text-align: center;"><button class="register_button" type="submit">Register</button></p>
+            <p style="text-align: center;"><button class="register_button" type="submit">Đăng kí</button></p>
         </form>
     </div>
 </div>

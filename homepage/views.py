@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from  django.http import HttpResponse
 from .forms import (
     RegisterForm,
-    ChangeInfoForm
+    ChangeInfoForm,
 )
 from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib.auth import update_session_auth_hash, login as auth_login, authenticate
@@ -37,15 +37,15 @@ def login(request):
             user = authenticate(request, username=username, password=password)
             if user is not None:
                 auth_login(request, user)
-                return redirect('homepage:profile')
+                return redirect('dashboard:index')
         return render(request, 'homepage/login.html')
     else:
-        return redirect('homepage:profile')
+        return redirect('dashboard:c')
 
 
 @login_required(login_url='/login/')
 def profile(request):
-    profile = UserProfile.objects.all()
+    profile = UserProfile.objects.get(user = request.user)
     args = {'user': request.user, 'profile': profile}
     return render(request, 'homepage/profile.html', args)
 
@@ -77,6 +77,3 @@ def change_password(request):
         form = PasswordChangeForm(user = request.user)
     args = {'form': form}
     return render(request, 'homepage/change_password.html', args)
-
-def demo(request):
-    return render(request, 'homepage/demo.html')

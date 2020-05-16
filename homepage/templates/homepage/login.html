@@ -1,8 +1,8 @@
-{% extends 'base.html' %}
+{% extends 'homepage/base.html' %}
 {% load static %}
 
 {% block head %}
-<title>Login Page</title>
+<title>Đăng Nhập</title>
 <link rel="stylesheet" type="text/css" href="{% static 'homepage/css/login_form.css' %}">
 {% endblock %}
 
@@ -14,9 +14,9 @@
     <div class="loginform">
         <form method="post">
             {% csrf_token %}
-            <label><b>Username</b></label>
+            <label><b>Tên đăng nhập</b></label>
             <input type="text" placeholder="Enter Username" name="username" required>
-            <label><b>Password</b></label>
+            <label><b>Mật khẩu</b></label>
             <input type="password" placeholder="Enter Password" name="password" required>
             <p style="text-align: center;"><button class="button_login" type="submit">Login</button></p>
         </form>

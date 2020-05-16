@@ -1,20 +1,18 @@
-{% extends 'base.html' %}
+{% extends 'homepage/base.html' %}
 
 {% block head %}
-<title>Profile</title>
+<title>Thông tin cá nhân!</title>
 {% endblock %}
 
 {% block body %}
 <div class="container">
-    <h2>Your Profile!</h2>
-    <p>User name: {{ user }}</p>
-    <p>First name: {{ user.first_name }}</p>
-    <p>Last name: {{ user.last_name }}</p>
+    <h2>Thông tin cá nhân!</h2>
+    <p>Tên đăng nhập: {{ user }}</p>
+    <p>Tên: {{ user.first_name }}</p>
+    <p>Họ: {{ user.last_name }}</p>
     <p>Email: {{ user.email }}</p>
-    {% for profile in profile %}
-        <p>Farm ID: {{ profile.farm_id }}</p> <!-- -->
-    {% endfor %}
-    <button onclick="window.location.href = '{% url 'homepage:change_info' %}';" type="button" class="btn btn-info">Change Info</button>
-    <button onclick="window.location.href = '{% url 'homepage:change_password' %}';" type="button" class="btn btn-info">Change Password</button>
+    <p>Tên nông trại: {{ profile.farm_name }}</p>
+    <button onclick="window.location.href = '{% url 'homepage:change_info' %}';" type="button" class="btn btn-info">Thay đổi thông tin</button>
+    <button onclick="window.location.href = '{% url 'homepage:change_password' %}';" type="button" class="btn btn-info">Thay đổi mật khẩu</button>
 </div>
 {% endblock %}

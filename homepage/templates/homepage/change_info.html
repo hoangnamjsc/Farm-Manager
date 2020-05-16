@@ -1,4 +1,4 @@
-{% extends 'base.html' %}
+{% extends 'homepage/base.html' %}
 
 {% block head %}
 <title>Change Info</title>
@@ -6,7 +6,7 @@
 
 {% block body %}
 <div class="container">
-    <h2>Change Info!</h2>
+    <h2>Thay đổi thông tin!</h2>
     <form method="post">
         {% csrf_token %}
         <!--
@@ -16,7 +16,7 @@
         <p>Email: {{ form.email }}</p>
         -->
         {{ form.as_p }}
-        <button type="submit" class="btn btn-danger">Save</button>
+        <button type="submit" class="btn btn-danger">Lưu</button>
     </form>
 </div>
 {% endblock %}

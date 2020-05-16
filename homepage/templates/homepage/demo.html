@@ -1,4 +1,4 @@
-{% extends 'base.html' %}
+{% extends 'homepage/base.html' %}
 
 {% block head %}
 <title>Register</title>
@@ -6,18 +6,10 @@
 
 {% block body %}
 <div class="container" style="width: 60% !important;">
-    <div class="imgcontainer">
-      <img src="{% static 'homepage/img/login.png' %}" alt="Avatar" class="avatar">
-    </div>
-    <div class="loginform">
-        <form method="post">
-            {% csrf_token %}
-            <label><b>Username</b></label>
-            <input type="text" placeholder="Enter Username" name="username" required>
-            <label><b>Password</b></label>
-            <input type="password" placeholder="Enter Password" name="password" required>
-            <p style="text-align: center;"><button class="button_login" type="submit">Login</button></p>
-        </form>
-    </div>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Create Staff User</button>
+    </form>
 </div>
 {% endblock %}
