@@ -1,0 +1,15 @@
+{% for staff in staffs %}
+<tr>
+    <td>{{ staff.staff_name }}</td>
+    <td>{{ staff.get_staff_position_display }}</td>
+    <td>{{ staff.staff_phone }}</td>
+    <td>{{ staff.staff_email }}</td>
+    <td>
+        <button class="btn btn-block bg-gradient-info btn-sm" type="button" url="{% url 'dashboard:staff_update' staff.id %}">Edit</button>
+    </td>
+</tr>
+{% empty %}
+<tr>
+  <td colspan="7" class="text-center bg-warning">No book</td>
+</tr>
+{% endfor %}
