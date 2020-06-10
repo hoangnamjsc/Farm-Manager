@@ -1,0 +1,25 @@
+{% for book in books %}
+  <tr>
+    <td>{{ book.id }}</td>
+    <td>{{ book.title }}</td>
+    <td>{{ book.author }}</td>
+    <td>{{ book.book_type }}</td>
+    <td>{{ book.publication_date }}</td>
+    <td>{{ book.pages }}</td>
+    <td>{{ book.price }}</td>
+    <td>  
+      <button class="btn btn-warning show-form-update btn-sm" data-url="{% url 'dashboard:book_update' book.id %}">
+      <span class="glyphicon glyphicon-pencil"></span>
+      Sửa
+      </button>
+      <button class="btn btn-danger show-form-delete btn-sm" data-url="{% url 'dashboard:book_delete' book.id %}">
+      <span class="glyphicon glyphicon-trash"></span>
+      Xóa
+      </button>
+    </td>
+  </tr>
+{% empty %}
+  <tr>
+    <td colspan="7" class="text-center bg-warning">No book</td>
+  </tr>
+{% endfor %}

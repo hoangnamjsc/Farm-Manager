@@ -77,3 +77,9 @@ def change_password(request):
         form = PasswordChangeForm(user = request.user)
     args = {'form': form}
     return render(request, 'homepage/change_password.html', args)
+
+def aboutus(request):
+    return render(request, 'homepage/about.html')
+
+def contact(request):
+    return  render(request, 'homepage/contact.html')

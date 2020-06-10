@@ -5,7 +5,6 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
-
   <title>AdminLTE 3 | Dashboard 2</title>
   {% block head %}
   {% endblock %}
@@ -107,7 +106,7 @@
             </ul>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="{% url 'dashboard:staffmanager' %}" class="nav-link">
+                <a href="#" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Quản lý nhân sự</p>
                 </a>
@@ -132,7 +131,7 @@
             </ul>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="{% url 'dashboard:additem' %}" class="nav-link">
+                <a href="{% url 'dashboard:warehouse' %}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Quản lý kho</p>
                 </a>
@@ -155,6 +154,15 @@
                 </a>
               </li>
             </ul>
+          </li>
+          <li class="nav-item">
+            <a href="{% url 'dashboard:calendar' %}" class="nav-link">
+              <i class="nav-icon fas fa-th"></i>
+              <p>
+                Lịch Làm Việc
+                <span class="right badge badge-danger">New</span>
+              </p>
+            </a>
           </li>
           <li class="nav-header">EXAMPLES</li>
           <li class="nav-item has-treeview">

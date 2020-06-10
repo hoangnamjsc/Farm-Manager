@@ -19,10 +19,10 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Liên Hệ</a>
+                    <a class="nav-link" href="{% url 'homepage:contact' %}">Liên Hệ</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Thông Tin</a>
+                    <a class="nav-link" href="{% url 'homepage:aboutus' %}">Thông Tin</a>
                 </li>
             </ul>
             <div>
@@ -32,8 +32,8 @@
                 <button onclick="window.location.href = '{% url 'homepage:profile' %}';" class="btn btn-outline-primary btn-sm">Thông tin cá nhân</button>
                 <button onclick="window.location.href = '{% url 'homepage:logout' %}';" class="btn btn-outline-secondary btn-sm" type="submit">Đăng xuất</button>
                 {% else %}
-                <button onclick="window.location.href = '{% url 'homepage:login' %}';" class="btn btn-info" type="submit">Login</button>
-                <button onclick="window.location.href = '{% url 'homepage:register' %}';" class="btn btn-success" type="submit">Register</button>
+                <button onclick="window.location.href = '{% url 'homepage:login' %}';" class="btn btn-info" type="submit">Đăng nhập</button>
+                <button onclick="window.location.href = '{% url 'homepage:register' %}';" class="btn btn-success" type="submit">Đăng ký</button>
                 {% endif %}
             </div>
         </div>

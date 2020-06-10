@@ -11490,7 +11490,7 @@
 			 *      } );
 			 *    } );
 			 */
-			"sInfo": "Tổng số nhân viên  _TOTAL_",
+			"sInfo": "Tổng số _TOTAL_",
 	
 	
 			/**
@@ -11651,7 +11651,7 @@
 			 *      } );
 			 *    } );
 			 */
-			"sLengthMenu": "Hiển thị _MENU_ nhân viên",
+			"sLengthMenu": "Hiển thị _MENU_",
 	
 
 			/**
