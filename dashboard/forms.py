@@ -1,5 +1,5 @@
 from django import forms
-from .models import Staff, Book
+from .models import Staff, Warehouse
 
 class StaffForm(forms.ModelForm):
     staff_name = forms.CharField()
@@ -7,11 +7,9 @@ class StaffForm(forms.ModelForm):
     staff_email = forms.EmailField()
     class Meta:
         model = Staff
-        fields = ('staff_name','staff_phone','staff_email','staff_position')
+        fields = ('staff_name','staff_phone','staff_email','staff_position', 'staff_salary')
 
-
-class BookForm(forms.ModelForm):
-	publication_date = forms.DateTimeInput()
-	class Meta:
-		model = Book
-		fields = ('title', 'publication_date', 'author', 'price', 'pages', 'book_type', )
+class WarehouseForm(forms.ModelForm):
+    class Meta:
+        model = Warehouse
+        fields = ('name','product_name','amount')

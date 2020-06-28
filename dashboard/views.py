@@ -1,9 +1,8 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
-from .models import Staff, Warehouse, Calendar, Book
-from .forms import StaffForm, BookForm
-from django.views.generic import TemplateView, View, DeleteView
+from .models import Staff, Warehouse, Calendar
+from .forms import StaffForm, WarehouseForm
 from django.http import JsonResponse
 from django.template.loader import render_to_string
 
@@ -11,13 +10,10 @@ from django.template.loader import render_to_string
 # Create your views here.
 @login_required(login_url='/login/')
 def index(request):
-    return render(request, 'dashboard/index.html')
-
-
-@login_required(login_url='/login/')
-def widgets(request):
-    return render(request, 'dashboard/widgets.html')
-
+    staff = Staff.objects.all()
+    warehouse = Warehouse.objects.all()
+    args = {'staff': staff, 'warehouse': warehouse}
+    return render(request, 'dashboard/index.html', args)
 
 @login_required(login_url='/login/')
 def addstaff(request):
@@ -35,10 +31,56 @@ def addstaff(request):
     return render(request, 'dashboard/addstaff.html')
 
 
+#### CRUD ####
 @login_required(login_url='/login/')
 def staff_list(request):
-    pass
+    staffs = Staff.objects.filter(farm_id=request.user)
+    context = {
+        'staffs': staffs
+    }
+    return render(request, 'dashboard/staff_list.html', context)
 
+
+def save_all(request, form, template_name):
+    data = dict()
+    if request.method == 'POST':
+        if form.is_valid():
+            form.save()
+            data['form_is_valid'] = True
+            staffs = Staff.objects.filter(farm_id=request.user)
+            data['book_list'] = render_to_string('dashboard/staff_list_2.html', {'staffs': staffs})
+        else:
+            data['form_is_valid'] = False
+    context = {
+        'form': form
+    }
+    data['html_form'] = render_to_string(template_name, context, request=request)
+    return JsonResponse(data)
+
+
+def staff_update(request, id):
+    staff = get_object_or_404(Staff, id=id)
+    if request.method == 'POST':
+        form = StaffForm(request.POST, instance=staff)
+    else:
+        form = StaffForm(instance=staff)
+    return save_all(request, form, 'dashboard/staff_update.html')
+
+
+def staff_delete(request, id):
+    data = dict()
+    staff = get_object_or_404(Staff, id=id)
+    if request.method == "POST":
+        staff.delete()
+        data['form_is_valid'] = True
+        staffs = Staff.objects.filter(farm_id=request.user)
+        data['book_list'] = render_to_string('dashboard/staff_list_2.html', {'staffs': staffs})
+    else:
+        context = {'staff': staff}
+        data['html_form'] = render_to_string('dashboard/staff_delete.html', context, request=request)
+
+    return JsonResponse(data)
+#### END CRUD ####
 
 @login_required(login_url='/login/')
 def additem(request):
@@ -54,14 +96,6 @@ def additem(request):
         ###
     return render(request, 'dashboard/additem.html')
 
-
-@login_required(login_url='/login/')
-def tables(request):
-    data = Staff.object.all()
-    args = {'data': data}
-    return render(request, 'dashboard/tables.html', args)
-
-
 @login_required(login_url='/login/')
 def calendar(request):
     data = Calendar.objects.all()
@@ -71,38 +105,21 @@ def calendar(request):
 
 @login_required(login_url='/login/')
 def warehouse(request):
-    data = Warehouse.objects.all()
-    args = {'house': data}
-    return render(request, 'dashboard/warehouse.html', args)
-
-
-class CrudView(TemplateView):
-    template_name = 'dashboard/demo.html'
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['data'] = Staff.objects.all()
-        return context
-
-
-# Demo CRUD
-
-def book_list(request):
-    books = Book.objects.all()
+    warehouses = Warehouse.objects.filter(farm_id=request.user)
     context = {
-        'books': books
+        'warehouses': warehouses
     }
-    return render(request, 'dashboard/book_list.html', context)
+    return render(request, 'dashboard/warehouse_list.html', context)
 
 
-def save_all(request, form, template_name):
+def save_all_warehouses(request, form, template_name):
     data = dict()
     if request.method == 'POST':
         if form.is_valid():
             form.save()
             data['form_is_valid'] = True
-            books = Book.objects.all()
-            data['book_list'] = render_to_string('dashboard/book_list_2.html', {'books': books})
+            warehouses = Warehouse.objects.filter(farm_id=request.user)
+            data['book_list'] = render_to_string('dashboard/warehouse_list_2.html', {'warehouses': warehouses})
         else:
             data['form_is_valid'] = False
     context = {
@@ -112,33 +129,28 @@ def save_all(request, form, template_name):
     return JsonResponse(data)
 
 
-def book_create(request):
+def warehouse_update(request, id):
+    warehouse = get_object_or_404(Warehouse, id=id)
     if request.method == 'POST':
-        form = BookForm(request.POST)
+        form = WarehouseForm(request.POST, instance=warehouse)
     else:
-        form = BookForm()
-    return save_all(request, form, 'dashboard/book_create.html')
+        form = WarehouseForm(instance=warehouse)
+    return save_all(request, form, 'dashboard/warehouse_update.html')
 
 
-def book_update(request, id):
-    book = get_object_or_404(Book, id=id)
-    if request.method == 'POST':
-        form = BookForm(request.POST, instance=book)
-    else:
-        form = BookForm(instance=book)
-    return save_all(request, form, 'dashboard/book_update.html')
-
-
-def book_delete(request, id):
+def warehouse_delete(request, id):
     data = dict()
-    book = get_object_or_404(Book, id=id)
+    warehouse = get_object_or_404(Warehouse, id=id)
     if request.method == "POST":
-        book.delete()
+        warehouse.delete()
         data['form_is_valid'] = True
-        books = Book.objects.all()
-        data['book_list'] = render_to_string('dashboard/book_list_2.html', {'books': books})
+        warehouses = Warehouse.objects.filter(farm_id=request.user)
+        data['book_list'] = render_to_string('dashboard/warehouse_list_2.html', {'warehouses': warehouses})
     else:
-        context = {'book': book}
-        data['html_form'] = render_to_string('dashboard/book_delete.html', context, request=request)
+        context = {'warehouse': warehouse}
+        data['html_form'] = render_to_string('dashboard/warehouse_delete.html', context, request=request)
 
     return JsonResponse(data)
+#### END CRUD ####
+
+

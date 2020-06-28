@@ -1,0 +1,17 @@
+{% load crispy_forms_tags %}
+<form method="post" data-url="{% url 'dashboard:warehouse_delete' warehouse.id %}" class="delete-form">
+	{% csrf_token %}
+		<div class="modal-header">
+		<h5 class="modal-title" >Cảnh báo</h5>
+		<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+		<span aria-hidden="true">&times;</span>
+		</button>
+		</div>
+		<div class="modal-body">
+		<p> Bạn có chắc chắn muốn xóa <strong>{{warehouse.name}}</strong> ?</p>
+		</div>
+		<div class="modal-footer">
+		<button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Đóng</button>
+		<button type="submit" class="btn btn-danger btn-sm">Xóa</button>
+		</div>
+</form>

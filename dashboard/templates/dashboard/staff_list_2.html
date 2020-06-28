@@ -1,0 +1,29 @@
+{% for staff in staffs %}
+  <tr>
+    <td>*</td>
+    <td>{{ staff.staff_name }}</td>
+    <td>{{ staff.get_staff_position_display }}</td>
+    <td>{{ staff.staff_phone }}</td>
+    <td>{{ staff.staff_email }}</td>
+    <td>{{ staff.staff_salary }}</td>
+    <td>{{ staff.staff_off }}</td>
+    <td>
+      <button class="btn btn-success btn-sm" onclick="window.location.href='{% url 'dashboard:addstaff' %}'">
+      <span class="glyphicon glyphicon-pencil"></span>
+      Thêm
+      </button>
+      <button class="btn btn-warning show-form-update btn-sm" data-url="{% url 'dashboard:staff_update' staff.id %}">
+      <span class="glyphicon glyphicon-pencil"></span>
+      Sửa
+      </button>
+      <button class="btn btn-danger show-form-delete btn-sm" data-url="{% url 'dashboard:staff_delete' staff.id %}">
+      <span class="glyphicon glyphicon-trash"></span>
+      Xóa
+      </button>
+    </td>
+  </tr>
+{% empty %}
+  <tr>
+    <td colspan="7" class="text-center bg-warning">Không có nhân viên</td>
+  </tr>
+{% endfor %}

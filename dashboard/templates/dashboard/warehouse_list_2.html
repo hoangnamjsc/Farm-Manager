@@ -1,0 +1,26 @@
+{% for warehouse in warehouses %}
+  <tr>
+    <td>*</td>
+    <td>{{ warehouse.product_name }}</td>
+    <td>{{ warehouse.get_name_display }}</td>
+    <td>{{ warehouse.amount }}</td>
+    <td>
+      <button class="btn btn-success btn-sm" onclick="window.location.href='{% url 'dashboard:additem' %}'">
+      <span class="glyphicon glyphicon-pencil"></span>
+      Thêm
+      </button>
+      <button class="btn btn-warning show-form-update btn-sm" data-url="{% url 'dashboard:warehouse_update' warehouse.id %}">
+      <span class="glyphicon glyphicon-pencil"></span>
+      Sửa
+      </button>
+      <button class="btn btn-danger show-form-delete btn-sm" data-url="{% url 'dashboard:warehouse_delete' warehouse.id %}">
+      <span class="glyphicon glyphicon-trash"></span>
+      Xóa
+      </button>
+    </td>
+  </tr>
+{% empty %}
+  <tr>
+    <td colspan="7" class="text-center bg-warning">Không có sản phẩm trong kho</td>
+  </tr>
+{% endfor %}

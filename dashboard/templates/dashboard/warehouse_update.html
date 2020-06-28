@@ -1,19 +1,19 @@
 {% load crispy_forms_tags %}
 {% load static %}
-<form method="post" data-url="{% url 'dashboard:book_update' form.instance.id %}" class="update-form">
+<form method="post" data-url="{% url 'dashboard:warehouse_update' form.instance.id %}" class="update-form">
 	{% csrf_token %}
 		<div class="modal-header">
-		<h5 class="modal-title" >Update Book</h5>
+		<h5 class="modal-title" >Thay đổi thông tin</h5>
 		<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 		<span aria-hidden="true">&times;</span>
 		</button>
 		</div>
 		<link rel="stylesheet" href="{% static 'dashboard/crud_update.css' %}">
 		<div class="modal-body">
-		{{form|crispy}}
+		{{ form|crispy }}
 		</div>
 		<div class="modal-footer">
-		<button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Close</button>
-		<button type="submit" class="btn btn-primary btn-sm">edit book</button>
+		<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+		<button type="submit" class="btn btn-primary">Thay đổi</button>
 		</div>
 </form>

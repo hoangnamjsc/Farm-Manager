@@ -5,19 +5,15 @@ from . import views
 app_name = 'dashboard'
 urlpatterns = [
     path('', views.index, name='index'),
-    path('demo/', views.CrudView.as_view(), name='crud_ajax'),
-    path('widgets/', views.widgets, name='widgets'),
-    path('staffadd/', views.addstaff, name='addstaff'),
-    # Staff Manager
-
     path('calendar/', views.calendar, name='calendar'),
+    # Staff
+    path('staffadd/', views.addstaff, name='addstaff'),
+    url(r'^staffs/$', views.staff_list, name='staff_list'),
+    url(r'^staffs/(?P<id>\d+)/update$', views.staff_update, name='staff_update'),
+    url(r'^staffs/(?P<id>\d+)/delete$', views.staff_delete, name='staff_delete'),
+    # Warehouse
     path('additem/', views.additem, name='additem'),
-    path('warehouse/', views.warehouse, name='warehouse'),
-    path('tables/', views.tables, name='tables'),
-
-
-    url(r'^books/$', views.book_list, name='book_list'),
-    url(r'^books/create$', views.book_create, name='book_create'),
-    url(r'^books/(?P<id>\d+)/update$', views.book_update, name='book_update'),
-    url(r'^books/(?P<id>\d+)/delete$', views.book_delete, name='book_delete'),
+    url(r'^warehouse/$', views.warehouse, name='warehouse'),
+    url(r'^warehouse/(?P<id>\d+)/update$', views.warehouse_update, name='warehouse_update'),
+    url(r'^warehouse/(?P<id>\d+)/delete$', views.warehouse_delete, name='warehouse_delete'),
 ]
