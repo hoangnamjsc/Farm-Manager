@@ -135,7 +135,7 @@ def warehouse_update(request, id):
         form = WarehouseForm(request.POST, instance=warehouse)
     else:
         form = WarehouseForm(instance=warehouse)
-    return save_all(request, form, 'dashboard/warehouse_update.html')
+    return save_all_warehouses(request, form, 'dashboard/warehouse_update.html')
 
 
 def warehouse_delete(request, id):
