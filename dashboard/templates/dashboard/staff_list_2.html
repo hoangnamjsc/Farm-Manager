@@ -8,10 +8,6 @@
     <td>{{ staff.staff_salary }}</td>
     <td>{{ staff.staff_off }}</td>
     <td>
-      <button class="btn btn-success btn-sm" onclick="window.location.href='{% url 'dashboard:addstaff' %}'">
-      <span class="glyphicon glyphicon-pencil"></span>
-      Thêm
-      </button>
       <button class="btn btn-warning show-form-update btn-sm" data-url="{% url 'dashboard:staff_update' staff.id %}">
       <span class="glyphicon glyphicon-pencil"></span>
       Sửa
