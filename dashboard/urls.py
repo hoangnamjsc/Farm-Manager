@@ -2,9 +2,12 @@ from django.urls import path
 from django.conf.urls import url
 from . import views
 
+###
 app_name = 'dashboard'
 urlpatterns = [
+    # Index
     path('', views.index, name='index'),
+    # Calendar
     path('calendar/', views.calendar, name='calendar'),
     # Staff
     path('staffadd/', views.addstaff, name='addstaff'),
